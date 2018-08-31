@@ -10,11 +10,9 @@ import org.sistema.spring.jdbc.models.Client;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class JdbcClientDAO implements ClientDAO{
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 	
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	public void insert(String name, String country, String phone, Integer age) {

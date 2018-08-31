@@ -9,9 +9,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
+	private static ApplicationContext context;
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		context = new ClassPathXmlApplicationContext("beans.xml");
 		JdbcClientDAO clientJDBCTemplate = (JdbcClientDAO) context.getBean("clientJDBCTemplate");
 		System.out.println("Creating clients--------------------------");
 		clientJDBCTemplate.insert("Cesar", "Spain", "65987", 32);
@@ -37,6 +38,7 @@ public class Main {
 		
 		clientJDBCTemplate.truncate();
 		selectAllCLients(clientJDBCTemplate);
+		
 	}
 	
 	private static void selectAllCLients(JdbcClientDAO clientDAO) {

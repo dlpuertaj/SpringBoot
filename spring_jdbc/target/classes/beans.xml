@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		                http://www.springframework.org/schema/tx 
+		                http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		                http://www.springframework.org/schema/util 
+		                http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		                http://www.springframework.org/schema/aop
+		                http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -19,5 +25,43 @@
 	<bean id="clientJDBCTemplate" class="org.sistema.spring.jdbc.dao.impl.JdbcClientDAO">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-
+	
+	<bean id="kart1" class="org.sistema.spring.aspects.models.Kart" p:name="StringKart_1" p:speed="6" p:acceleration="6" p:grip="6"/>
+	<bean id="kart2" class="org.sistema.spring.aspects.models.Kart" p:name="StringKart_2" p:speed="7" p:acceleration="5" p:grip="6"/>
+	<bean id="kart3" class="org.sistema.spring.aspects.models.Kart" p:name="StringKart_3" p:speed="5" p:acceleration="6" p:grip="7"/>
+	<bean id="kart4" class="org.sistema.spring.aspects.models.Kart" p:name="StringKart_4" p:speed="8" p:acceleration="5" p:grip="5"/>	
+	
+	<bean id="circuit" class="org.sistema.spring.aspects.models.Circuit">
+		<constructor-arg name="name" value="Monza"/>
+		<constructor-arg name="distance" value="#{new java.util.Random().nextInt(100) + 100}"/>
+	</bean>
+	
+	<bean id="race" class="org.sistema.spring.aspects.models.Race">
+		<property name="name" value="GP Spring"/>
+		<property name="karts">
+			<list>
+				<ref bean="kart1"/>
+				<ref bean="kart2"/>
+				<ref bean="kart3"/>
+				<ref bean="kart4"/>
+			</list>
+		</property>
+		<property name="circuit" ref="circuit"/>
+	</bean>
+	
+	<bean id="monitoringKart" class="org.sistema.spring.aspects.monitors.MonitoringKart"/>
+	<bean id="monitoringCircuit" class="org.sistema.spring.aspects.monitors.MonitoringCircuit"/>
+	<aop:aspectj-autoproxy>
+		<aop:include name="monitoringKart"/>
+		<aop:include name="monitoringCircuit"/>
+	</aop:aspectj-autoproxy>
+	
+	<bean id="hawaianGreet" class="org.sistema.spring.log4j.models.Greet">
+		<property name="greeting" value="Aloha"/>
+	</bean>
+	<bean id="greetingEngine" class="org.sistema.spring.log4j.models.GreetingEngine">
+		<property name="greet" ref="hawaianGreet"/>
+		<property name="times" value="10"/>
+	</bean>
+	
 </beans>

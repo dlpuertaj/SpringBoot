@@ -17,17 +17,4 @@ public class MjphApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MjphApplication.class, args);
 	}
-
-	@GetMapping
-	public List<Movie> hello(){
-
-		List<Movie> list = new ArrayList<>();
-		Movie movie = new Movie("The Lord of the Rings",
-								"Movie", 2000,
-								LocalDate.now()
-				);
-		list.add(movie);
-
-		return list;
-	}
 }

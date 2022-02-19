@@ -1,6 +1,7 @@
 package com.dlp.mjph.service;
 
 import com.dlp.mjph.model.Movie;
+import com.dlp.mjph.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -10,14 +11,13 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    public List<Movie> getMovies() {
-        List<Movie> list = new ArrayList<>();
-        Movie movie = new Movie("The Lord of the Rings",
-                "Movie", 2000,
-                LocalDate.now()
-        );
-        list.add(movie);
+    private final MovieRepository movieRepository;
 
-        return list;
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    public List<Movie> getMovies() {
+        return movieRepository.findAll();
     }
 }

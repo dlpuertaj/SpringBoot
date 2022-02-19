@@ -5,12 +5,10 @@ import com.dlp.mjph.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/movie")
+@RequestMapping(path = "api/v1/movies")
 public class MovieController {
 
     private final MovieService movieService;
@@ -22,12 +20,17 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getSMovies(){
-       return movieService.getMovies();
+        return movieService.getMovies();
     }
 
     @PostMapping
     public void saveMovie(@RequestBody Movie movie){
         movieService.addNewMovie(movie);
+    }
+
+    @DeleteMapping(path = "/movieId")
+    public void deleteMovie(@PathVariable("movieId") Integer movieId){
+        movieService.deleteMovieById(movieId);
     }
 
 

@@ -27,8 +27,19 @@ public class MovieService {
                 .findMovieByMovieId(movie.getMovieId());
 
         if (movieInBD.isPresent()){
-            throw new IllegalStateException("Movie id exists in database!");
+
         }
         movieRepository.save(movie);
+    }
+
+    public void deleteMovieById(Integer movieId) {
+        // 1. movie in db ?
+        boolean movieExits = movieRepository.existsById(movieId);
+        if(!movieExits){
+            throw new IllegalStateException(
+                    "Movie id does not exists in database!");
+        }
+        // delete movie
+        movieRepository.deleteById(movieId);
     }
 }

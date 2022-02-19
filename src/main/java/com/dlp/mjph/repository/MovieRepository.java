@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
 
     //@Query("SELECT m FROM Movie m WHERE m.movieId = ?1")
-    Optional<Movie> findMovieById(Integer movieId);
+    Optional<Movie> findMovieByMovieId(Integer movieId);
 }

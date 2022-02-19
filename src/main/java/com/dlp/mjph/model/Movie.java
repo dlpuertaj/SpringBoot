@@ -1,9 +1,16 @@
 package com.dlp.mjph.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
+@Entity
+@Table
 public class Movie {
+
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
     private Integer movieId;
     private String Title;
     private String Description;

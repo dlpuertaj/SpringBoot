@@ -3,9 +3,7 @@ package com.dlp.mjph.controller;
 import com.dlp.mjph.model.Movie;
 import com.dlp.mjph.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,4 +24,11 @@ public class MovieController {
     public List<Movie> getSMovies(){
        return movieService.getMovies();
     }
+
+    @PostMapping
+    public void saveMovie(@RequestBody Movie movie){
+        movieService.addNewMovie(movie);
+    }
+
+
 }

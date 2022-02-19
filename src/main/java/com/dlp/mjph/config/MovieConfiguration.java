@@ -27,7 +27,13 @@ public class MovieConfiguration {
                     LocalDate.now()
             );
 
+            Movie m2 = new Movie("The Godfather",
+                    "Movie", 2000,
+                    LocalDate.now()
+            );
+
             list.add(m1);
+            list.add(m2);
             movieRepository.saveAll(list);
         };
 

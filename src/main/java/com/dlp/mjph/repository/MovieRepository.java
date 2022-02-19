@@ -9,4 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
+
+    //@Query("SELECT m FROM Movie m WHERE m.movieId = ?1")
+    Optional<Movie> findMovieById(Integer movieId);
 }

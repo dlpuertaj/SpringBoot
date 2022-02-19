@@ -23,6 +23,12 @@ public class MovieService {
     }
 
     public void addNewMovie(Movie movie) {
+        Optional<Movie> movieInBD = movieRepository
+                .findMovieById(movie.getMovieId());
+
+        if (movieInBD.isPresent()){
+            throw new IllegalStateException("Movie id exists in database!");
+        }
         movieRepository.save(movie);
     }
 }

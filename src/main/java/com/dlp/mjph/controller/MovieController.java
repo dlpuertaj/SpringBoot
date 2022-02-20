@@ -24,8 +24,13 @@ public class MovieController {
     }
 
     @PostMapping
-    public void saveMovie(@RequestBody Movie movie){
+    public void saveNewMovie(@RequestBody Movie movie){
         movieService.addNewMovie(movie);
+    }
+
+    @PutMapping
+    public void updateMovie(@RequestBody Movie movie){
+        movieService.updateMovie(movie);
     }
 
     @DeleteMapping(path = "/movieId")

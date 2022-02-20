@@ -24,10 +24,11 @@ public class MovieService {
 
     public void addNewMovie(Movie movie) {
         Optional<Movie> movieInBD = movieRepository
-                .findMovieByMovieId(movie.getMovieId());
+                .findMovieByTitle(movie.getTitle());
 
         if (movieInBD.isPresent()){
-
+            throw new IllegalStateException(
+                    "Movie already in database!");
         }
         movieRepository.save(movie);
     }
@@ -41,5 +42,18 @@ public class MovieService {
         }
         // delete movie
         movieRepository.deleteById(movieId);
+    }
+
+    public void updateMovie(Movie movie) {
+        Optional<Movie> movieInBD = movieRepository
+                .findMovieByTitle(movie.getTitle());
+
+        if (!movieInBD.isPresent()){
+            throw new IllegalStateException(
+                    "Movie does not exist in database!");
+        }
+
+        movieRepository.save(movie);
+
     }
 }

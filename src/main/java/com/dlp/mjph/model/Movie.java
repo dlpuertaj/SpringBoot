@@ -12,8 +12,10 @@ public class Movie {
             strategy = GenerationType.IDENTITY
     )
     private Integer movieId;
-    private String Title;
-    private String Description;
+
+    @Column
+    private String title;
+    private String description;
     private Integer runningTime;
     private LocalDate releaseDate;
     
@@ -22,8 +24,8 @@ public class Movie {
 
     public Movie(String title, String description, Integer runningTime,
                  LocalDate releaseDate) {
-        Title = title;
-        Description = description;
+        this.title = title;
+        this.description = description;
         this.runningTime = runningTime;
         this.releaseDate = releaseDate;
     }
@@ -31,8 +33,8 @@ public class Movie {
     public Movie(Integer movieId, String title, String description,
                  Integer runningTime, LocalDate releaseDate) {
         this.movieId = movieId;
-        Title = title;
-        Description = description;
+        this.title = title;
+        this.description = description;
         this.runningTime = runningTime;
         this.releaseDate = releaseDate;
     }
@@ -46,19 +48,19 @@ public class Movie {
     }
 
     public String getTitle() {
-        return Title;
+        return this.title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-        return Description;
+        return this.description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Integer getRunningTime() {

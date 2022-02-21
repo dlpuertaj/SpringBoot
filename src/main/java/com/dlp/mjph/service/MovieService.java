@@ -4,6 +4,7 @@ import com.dlp.mjph.model.Movie;
 import com.dlp.mjph.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,4 +57,34 @@ public class MovieService {
         movieRepository.save(movie);
 
     }
+
+    public void updateMovie(Integer movieId, String newTitle){
+        Optional<Movie> movieInBD = movieRepository
+                .findMovieByMovieId(movieId);
+
+        if (!movieInBD.isPresent()){
+            throw new IllegalStateException(
+                    "Movie does not exist in database!");
+        }
+        if(newTitle != null && newTitle.length() != 0){
+            movieInBD.get().setTitle(newTitle);
+        }
+
+        movieRepository.save(movieInBD.get());
+    }
+
+    /*
+    @Transactional
+    public void updateMovie(Integer movieId, String newTitle){
+        Movie movieInBD = movieRepository
+                .findById(movieId).orElseThrow(()->
+                        new IllegalStateException(
+                                "Movie does not exist in database!"));
+
+        if(newTitle != null && newTitle.length() != 0){
+            movieInBD.setTitle(newTitle);
+        }
+    }
+    */
+
 }

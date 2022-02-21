@@ -4,9 +4,6 @@ import com.dlp.mjph.model.Movie;
 import com.dlp.mjph.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

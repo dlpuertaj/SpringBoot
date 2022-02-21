@@ -18,25 +18,32 @@ public class Movie {
     private String description;
     private Integer runningTime;
     private LocalDate releaseDate;
-    
+
+    @OneToOne
+    @JoinColumn(name = "genre_id",
+                referencedColumnName = "genre_id")
+    private MovieGenre genre;
+
     public Movie() {
     }
 
     public Movie(String title, String description, Integer runningTime,
-                 LocalDate releaseDate) {
+                 LocalDate releaseDate, MovieGenre genre) {
         this.title = title;
         this.description = description;
         this.runningTime = runningTime;
         this.releaseDate = releaseDate;
+        this.genre = genre;
     }
 
     public Movie(Integer movieId, String title, String description,
-                 Integer runningTime, LocalDate releaseDate) {
+                 Integer runningTime, LocalDate releaseDate, MovieGenre genre) {
         this.movieId = movieId;
         this.title = title;
         this.description = description;
         this.runningTime = runningTime;
         this.releaseDate = releaseDate;
+        this.genre = genre;
     }
 
     public Integer getMovieId() {
@@ -77,5 +84,13 @@ public class Movie {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public MovieGenre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(MovieGenre genre) {
+        this.genre = genre;
     }
 }

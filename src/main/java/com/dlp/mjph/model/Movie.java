@@ -2,6 +2,7 @@ package com.dlp.mjph.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table
@@ -23,6 +24,9 @@ public class Movie {
     @JoinColumn(name = "genre_id",
                 referencedColumnName = "genre_id")
     private MovieGenre genre;
+
+    @ManyToMany(mappedBy = "movies")
+    private Set<Actor> actors;
 
     public Movie() {
     }
